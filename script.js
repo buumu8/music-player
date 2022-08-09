@@ -106,7 +106,17 @@ function updateProgressBar(e) {
   }
 }
 
+// Set progress bar when user click to jump song
+function setProgressBar(e) {
+  const clickX = e.offsetX;
+  const width = this.clientWidth;
+  const { duration } = music;
+  music.currentTime = (clickX / width) * duration;
+}
+
 // Event Listeners
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
+music.addEventListener("ended", nextSong);
 music.addEventListener("timeupdate", updateProgressBar);
+progressContainer.addEventListener("click", setProgressBar);
